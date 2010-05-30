@@ -1,17 +1,15 @@
 class WinCmdEdit
 	def initialize(paras)
 		@paras = paras
-		
-		require "libglade2"
 		@glade = GladeXML.new("glade/win_cmd_edit.glade"){|handler|method(handler)}
 		
 		if (@paras["command"])
-			@glade.get_widget("txtTitle").text = @paras["command"]["name"]
-			@glade.get_widget("txtCommand").text = @paras["command"]["server_command"]
-			@glade.get_widget("txtShortcutKey").text = @paras["command"]["mobile_key"]
+			@glade["txtTitle"].text = @paras["command"]["name"]
+			@glade["txtCommand"].text = @paras["command"]["server_command"]
+			@glade["txtShortcutKey"].text = @paras["command"]["mobile_key"]
 		end
 		
-		@glade.get_widget("window").show
+		@glade["window"].show
 	end
 	
 	def on_btnSave_clicked
@@ -32,10 +30,10 @@ class WinCmdEdit
 			@paras["win_main"].update_commands
 		end
 		
-		@glade.get_widget("window").destroy
+		@glade["window"].destroy
 	end
 	
 	def on_btnCancel_clicked
-		@glade.get_widget("window").destroy
+		@glade["window"].destroy
 	end
 end

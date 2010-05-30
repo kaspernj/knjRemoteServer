@@ -4,7 +4,10 @@ Dir.chdir(File.dirname(__FILE__))
 
 #Load libs.
 require "knj/autoload"
-require "class_socket_client.rb"
+include Knj
+
+autoload :SocketClient, "class_socket_client.rb"
+
 
 def debugputs(object)
 	if ($opts["debug"])
@@ -44,7 +47,7 @@ end
 
 
 #Load config.
-homedir = Knj::Os.homedir
+homedir = Os.homedir
 data_dir = homedir + "/.knj/knjremoteserver"
 $db_fn = homedir + "/.knj/knjremoteserver/knjremoteserver.sqlite3"
 
@@ -55,7 +58,7 @@ end
 
 if !File.exists?($db_fn)
 	print "Making database in config-dir...\n"
-	FileUtils.copy("db/knjremoteserver.sqlite3", $db_fn)
+	FileUtils.copy("db/knjremoteserver_sample.sqlite3", $db_fn)
 end
 
 
